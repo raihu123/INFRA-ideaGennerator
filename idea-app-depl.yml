@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idea-app
+  labels:
+    app: idea-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: idea-app
+  template:
+    metadata:
+      labels:
+        app: idea-app
+    spec:
+      containers:
+        - name: idea-app
+          image: local/idea-app-img
+          imagePullPolicy: Never
+          # env:
+            # - name: SOME_ENV
+            #   value: $SOME_ENV
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: idea-app-service
+spec:
+  selector:
+    app: mongo-express
+  type: LoadBalancer  
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30000
+

@@ -1,0 +1,3 @@
+[submodule "IdeaBank"]
+	path = IdeaBank
+	url = https://github.com/raihu123/IdeaBank-DockerExample.git
